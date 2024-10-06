@@ -1,0 +1,159 @@
+\RequirePackage[hyphens]{url}
+\documentclass[10pt,fleqn,twoside]{book} % Default font size and left-justified equations
+
+\usepackage[top=2cm,bottom=2cm,left=2.2cm,right=2.2cm,headsep=10pt,a4paper]{geometry} % Page margins
+
+\usepackage[dvipsnames,table]{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{52,177,201} % Define the orange color used for highlighting throughout the book
+
+% Font Settings
+\usepackage{avant} % Use the Avantgarde font for headings
+%\usepackage{times} % Use the Times font for headings
+\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Symbol, Chancery and Computer Modern fonts
+\usepackage{mathrsfs}
+
+% to make math characters less curvy
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{amsmath}
+\setcounter{MaxMatrixCols}{20}
+
+\usepackage{float} % For the H option in the figure environment
+\usepackage{longtable}
+\usepackage{multicol,multirow}
+\setlength{\columnsep}{1cm}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage[none]{hyphenat}
+\usepackage{bbm}
+\usepackage{bm}
+\usepackage{nameref}
+\usepackage{datetime}
+\usepackage{cancel}
+\usepackage{scrextend}
+
+\usepackage{rotating}
+
+
+\usepackage[ruled,vlined,linesnumbered,resetcount,algochapter]{algorithm2e}
+\SetKwComment{Comment}{/* }{ */}
+
+
+% Bibliography
+\usepackage[style=numeric,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=false,backend=biber]{biblatex}
+\addbibresource{bibliography.bib} % BibTeX bibliography file
+
+
+\DeclareSortingScheme{title}{
+  \sort{
+    \field{title}
+  }
+  \sort{
+    \field{year}
+  }
+  \sort{
+    \field{author}
+  }
+}
+
+\ExecuteBibliographyOptions{sorting=title}
+
+\DeclareBibliographyDriver{book}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \printfield{title}%
+  \newunit\newblock
+  \printnames{author}%
+  \newunit\newblock
+  \printlist{publisher}%
+  \newunit\newblock
+  \printfield{year}%
+  \usebibmacro{finentry}%
+}
+
+
+\usepackage{array}
+
+\usepackage{pdflscape}
+
+\usepackage{ragged2e}
+
+\usepackage{imakeidx}
+\makeindex
+
+\usepackage{adjustbox}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+
+\usepackage{caption}
+\captionsetup[figure]{labelfont=bf, name=Fig., labelsep=colon}
+\usepackage{changepage} % For changing the margins
+
+\usepackage{lastpage}
+
+\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+
+
+\title{AIML Notes - A2Z}
+
+\begin{document}
+
+% \setlength{\parindent}{0cm}
+\setlength\parindent{0pt}
+
+\frontmatter
+\include{extra_pages/title_page}
+\include{extra_pages/copyright}
+\include{extra_pages/acknowledgement}
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+\mainmatter
+\pagenumbering{roman}
+\pagestyle{empty} % No headers
+\tableofcontents % Print the table of contents itself
+\include{notations}
+
+\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
+\pagestyle{fancy} % Print headers again
+\cleardoublepage
+
+%----------------------------------------------------------------------------------------
+%	CHAPTERs
+%----------------------------------------------------------------------------------------
+
+\mainmatter
+\pagenumbering{arabic}
+\cleardoublepage
+\begin{justify}
+\end{justify}
+
+
+%----------------------------------------------------------------------------------------
+%	Additional pages
+%----------------------------------------------------------------------------------------
+
+% \backmatter
+\pagestyle{empty}
+% \newgeometry{top=3cm,bottom=1.5cm,left=2cm,right=2cm}
+\nocite{*}
+\begin{justify}
+    \cleardoublepage
+    % \newcommand{\oldleftmark}{\leftmark}
+    % \renewcommand{\leftmark}{REFERENCES}
+    \defbibheading{bibempty}{\chapter*{References}}
+    \printbibliography[heading=bibempty]
+    % \renewcommand{\leftmark}{\oldleftmark}
+\end{justify}
+
+
+\cleardoublepage
+\printindex
+
+\end{document}
+
